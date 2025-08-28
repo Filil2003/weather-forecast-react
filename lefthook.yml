@@ -1,0 +1,26 @@
+# Common settings
+output:
+  - success
+  - failure
+  - execution_info
+
+# Git hooks
+pre-commit:
+  commands:
+    Check:
+      stage_fixed: true
+      run: npm run check:fix -- {staged_files}
+
+commit-msg:
+  jobs:
+    - name: "Commit message"
+      script: "check.sh"
+      runner: bash
+
+pre-push:
+  piped: true
+  commands:
+    Check:
+      run: npm run check:fix
+    Build:
+      run: npm run build
