@@ -2,6 +2,9 @@
 *.log*
 logs/
 
+# Auto-generated TypeScript declarations for CSS modules
+*.module.css.d.ts
+
 # Dependencies
 node_modules/
 
