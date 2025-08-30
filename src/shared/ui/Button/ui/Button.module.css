@@ -1,0 +1,41 @@
+.button {
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: inherit;
+  appearance: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  background-image:
+    linear-gradient(transparent, transparent),
+    linear-gradient(
+      to right,
+      var(--color-primary) 0%,
+      var(--color-secondary) 50%,
+      var(--color-primary) 100%
+    );
+  background-size: 200%;
+  border: none;
+  border-radius: 0.6em;
+  background-blend-mode: multiply;
+  transition:
+    background-position 0.3s,
+    background-color 0.3s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-position: 99%;
+    }
+  }
+  &:active {
+    background-color: #00000066;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
