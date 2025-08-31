@@ -9,7 +9,7 @@
 body {
   font-family: Verdana, sans-serif;
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background-color: var(--color-app);
   scroll-behavior: smooth;
   line-height: normal;
   overflow-wrap: anywhere;
