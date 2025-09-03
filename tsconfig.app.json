@@ -16,6 +16,14 @@
     "allowImportingTsExtensions": true,
     "moduleResolution": "Bundler",
     "noUncheckedSideEffectImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "#pages/*": ["pages/*"],
+      "#widgets/*": ["widgets/*"],
+      "#features/*": ["features/*"],
+      "#entities/*": ["entities/*"],
+      "#shared/*": ["shared/*"]
+    },
 
     /* Emit */
     "noEmit": true,
