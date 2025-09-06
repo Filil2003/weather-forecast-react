@@ -18,7 +18,7 @@ interface ForecastWeatherOperation {
   response: ForecastWeatherResponse | ApiError;
 }
 
-interface ForecastWeatherResponse {
+export interface ForecastWeatherResponse {
   location: Location;
   current: CurrentWeather;
   forecast: Forecast;
@@ -40,7 +40,7 @@ interface ApiError {
   message: string;
 }
 
-export interface Location {
+interface Location {
   name: string;
   region: string;
   country: string;
@@ -51,23 +51,30 @@ export interface Location {
   localtime: string;
 }
 
-export interface CurrentWeather {
+interface CurrentWeather {
   temp_c: number;
+  temp_f: number;
+  feelslike_c: number;
+  feelslike_f: number;
+  is_day: 0 | 1;
   condition: {
     text: string;
     code: number;
   };
+  wind_mph: number;
   wind_kph: number;
   wind_dir: string;
   humidity: number;
   cloud: number;
 }
 
-export interface Forecast {
+interface Forecast {
   forecastday: Array<{
     date: string;
     day: {
       avgtemp_c: number;
+      avgtemp_f: number;
+      maxwind_mph: number;
       maxwind_kph: number;
       avghumidity: number;
       daily_chance_of_rain: number;
@@ -77,5 +84,21 @@ export interface Forecast {
         code: number;
       };
     };
+    hour: Array<{
+      time: string;
+      temp_c: number;
+      temp_f: number;
+      feelslike_c: number;
+      feelslike_f: number;
+      is_day: 0 | 1;
+      wind_mph: number;
+      wind_kph: number;
+      wind_dir: string;
+      chance_of_rain: number;
+      condition: {
+        text: string;
+        code: number;
+      };
+    }>;
   }>;
 }
