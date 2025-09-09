@@ -10,12 +10,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.87.1",
     "clsx": "^2.1.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
+    "@tanstack/react-query-devtools": "^5.87.3",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.8",
