@@ -7,9 +7,9 @@
 }
 
 body {
-  font-family: Verdana, sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-app);
+  font-family: Inter, sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
   scroll-behavior: smooth;
   line-height: normal;
   overflow-wrap: anywhere;
