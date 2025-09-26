@@ -1,11 +1,13 @@
 import type { ComponentProps } from "react";
 
-export interface Props extends ComponentProps<"svg"> {
+interface CustomProps {
   code: number;
-  isDay: 0 | 1;
+  isDay: boolean;
   title: string;
-  size?: number;
+  size?: number | string;
 }
+
+type Props = CustomProps & Omit<ComponentProps<"svg">, keyof CustomProps>;
 
 export function WeatherIcon({
   code,
@@ -14,10 +16,12 @@ export function WeatherIcon({
   size = 24,
   ...props
 }: Props) {
+  const iconId = `${code}-${isDay ? "day" : "night"}`;
+
   return (
     <svg height={size} width={size} {...props} role="img">
       <title>{title}</title>
-      <use href={`weather-sprite.svg#${code}-${isDay}`} />
+      <use href={`weather-sprite.svg#${iconId}`} />
     </svg>
   );
 }
