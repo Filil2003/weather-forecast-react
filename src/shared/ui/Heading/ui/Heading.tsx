@@ -5,7 +5,7 @@ import styles from "./Heading.module.css";
 type HeadingTags = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 type Props<T extends HeadingTags> = ComponentProps<T> & {
-  as?: T;
+  as?: T | undefined;
   variant?: "small" | "medium" | "large" | "huge";
 };
 
