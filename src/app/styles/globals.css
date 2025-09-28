@@ -15,3 +15,8 @@ body {
   overflow-wrap: anywhere;
   min-block-size: 100svh;
 }
+
+ol,
+ul {
+  list-style: none;
+}
