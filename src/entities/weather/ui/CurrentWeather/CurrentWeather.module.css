@@ -1,0 +1,26 @@
+.condition {
+  display: flex;
+  text-align: right;
+}
+
+.temperature {
+  line-height: 1;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5em;
+  margin-inline: -0.5rem;
+}
+
+.item {
+  padding: 0.5em;
+  background-color: var(--foreground-color);
+  border-radius: var(--radius-md);
+}
+
+.title {
+  display: inline-flex;
+  gap: 0.25em;
+}
