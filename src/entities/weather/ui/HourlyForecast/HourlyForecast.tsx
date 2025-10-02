@@ -1,9 +1,5 @@
 import { useRef } from "react";
-import { Button } from "#shared/ui/Button";
-import { Heading } from "#shared/ui/Heading";
-import { Icon } from "#shared/ui/Icon";
-import { Section } from "#shared/ui/Section";
-import { Text } from "#shared/ui/Text";
+import { Button, Heading, Icon, Section, Text } from "#shared/ui";
 import { WeatherIcon } from "../WeatherIcon/WeatherIcon.tsx";
 import styles from "./HourlyForecast.module.css";
 import { mockHourlyForecast } from "./mock.ts";

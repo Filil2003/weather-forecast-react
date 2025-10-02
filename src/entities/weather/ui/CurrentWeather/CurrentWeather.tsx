@@ -1,8 +1,5 @@
-import { WeatherIcon } from "#entities/weather/ui/WeatherIcon/WeatherIcon.tsx";
-import { Heading } from "#shared/ui/Heading";
-import { Icon } from "#shared/ui/Icon";
-import { Section } from "#shared/ui/Section";
-import { Text } from "#shared/ui/Text";
+import { Heading, Icon, Section, Text } from "#shared/ui";
+import { WeatherIcon } from "../WeatherIcon/WeatherIcon.tsx";
 import styles from "./CurrentWeather.module.css";
 import { mockCurrentWeather } from "./mock.ts";
 

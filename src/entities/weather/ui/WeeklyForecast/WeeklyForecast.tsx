@@ -1,6 +1,5 @@
 import clsx from "clsx";
-import { Section } from "#shared/ui/Section";
-import { Text } from "#shared/ui/Text";
+import { Section, Text } from "#shared/ui";
 import { WeatherIcon } from "../WeatherIcon/WeatherIcon.tsx";
 import { mockWeeklyForecast } from "./mock";
 import styles from "./WeeklyForecast.module.css";
