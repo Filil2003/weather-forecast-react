@@ -1,27 +1,41 @@
-import type { Operations } from "./types.ts";
+import type {
+  ApiErrorResponse,
+  LocationSearchParams,
+  WeatherApiOperations,
+  WeatherForecastParams,
+} from "./types.ts";
 
-export class WeatherApi {
+export class WeatherApiClient {
   constructor(
     private apiKey: string,
-    private baseUrl = "https://api.weatherapi.com/v1",
+    private baseUrl: string,
   ) {}
 
-  private async request<T extends keyof Operations>(
-    endpoint: string,
-    query: Operations[T]["request"]["query"],
-  ): Promise<Operations[T]["response"]> {
-    const params = new URLSearchParams(
-      Object.entries({ ...query, key: this.apiKey }).map(([key, value]) => [
-        key,
-        String(value),
-      ]),
-    );
+  private async request<O extends keyof WeatherApiOperations>(
+    endpoint: WeatherApiOperations[O]["endpoint"],
+    params: WeatherApiOperations[O]["params"],
+  ): Promise<WeatherApiOperations[O]["response"]> {
+    const url = new URL(`${this.baseUrl}/${endpoint}.json`);
 
-    const res = await fetch(`${this.baseUrl}/${endpoint}.json?${params}`);
-    return res.json();
+    url.searchParams.append("key", String(this.apiKey));
+
+    Object.entries(params).forEach(([key, value]) => {
+      url.searchParams.append(key, String(value));
+    });
+
+    const response = await fetch(url.toString());
+    const data = await response.json();
+
+    if ("error" in data) return data as ApiErrorResponse;
+
+    return data as WeatherApiOperations[O]["response"];
   }
 
-  getForecast(query: Operations["forecast"]["request"]["query"]) {
-    return this.request("forecast", query);
+  public searchLocation(params: LocationSearchParams) {
+    return this.request<"searchLocation">("search", params);
+  }
+
+  public getForecast(params: WeatherForecastParams) {
+    return this.request<"getForecast">("forecast", params);
   }
 }
