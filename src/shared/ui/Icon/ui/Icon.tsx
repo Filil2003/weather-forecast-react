@@ -20,6 +20,7 @@ type SpriteIcons = {
     | "Visibility"
     | "Wind";
   flags: "RU" | "US";
+  weather: string;
 };
 
 type Sprites = keyof SpriteIcons;
@@ -31,7 +32,7 @@ interface Props<T extends Sprites> extends ComponentProps<"svg"> {
   size?: number | string;
 }
 
-export function IconComponent<T extends Sprites>({
+function IconComponent<T extends Sprites>({
   title,
   sprite,
   name,
@@ -52,5 +53,8 @@ export const Icon = Object.assign(IconComponent, {
   ),
   Flags: (props: Omit<Props<"flags">, "sprite">) => (
     <IconComponent sprite="flags" {...props} />
+  ),
+  Weather: (props: Omit<Props<"weather">, "sprite">) => (
+    <IconComponent sprite="weather" {...props} />
   ),
 });
