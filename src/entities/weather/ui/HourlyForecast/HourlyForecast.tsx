@@ -1,10 +1,24 @@
 import { useRef } from "react";
 import { Button, Heading, Icon, Section, Text } from "#shared/ui";
-import { WeatherIcon } from "../WeatherIcon/WeatherIcon.tsx";
 import styles from "./HourlyForecast.module.css";
-import { mockHourlyForecast } from "./mock.ts";
 
-export function HourlyForecast() {
+interface Props {
+  forecast: Array<{
+    time: string;
+    condition: {
+      text: string;
+      code: string; // TODO: Вместо кода получать сразу иконку?
+    };
+    temperature: {
+      celsius: string;
+      fahrenheit: string;
+    };
+    chanceOfRain: number;
+    chanceOfSnow: number;
+  }>;
+}
+
+export function HourlyForecast({ forecast }: Props) {
   const listRef = useRef<HTMLUListElement | null>(null);
 
   function handlePrev() {
@@ -32,21 +46,20 @@ export function HourlyForecast() {
           <Icon.Common name="ArrowLeft" title="Scroll left" />
         </Button>
         <ul className={styles.list} ref={listRef}>
-          {mockHourlyForecast.map((hour) => (
+          {forecast.map((hour) => (
             <li className={styles.item} key={hour.time}>
               <Text as="p">{hour.time}</Text>
-              <WeatherIcon
-                code={hour.code}
-                isDay={hour.isDay}
+              <Icon.Weather
+                name={hour.condition.code}
                 size={"3em"}
-                title={hour.condition}
+                title={hour.condition.text}
               />
               <Heading as="h3" variant="small">
-                {hour.temperature}
+                {hour.temperature.celsius}
               </Heading>
               <Text as="p" className={styles.precipitation} variant="caption">
                 <Icon.Common name="Raindrop" size={"1rem"} title="Raindrop" />
-                {hour.precipitationChange}
+                {hour.chanceOfRain}
               </Text>
             </li>
           ))}

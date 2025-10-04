@@ -1,14 +1,32 @@
 import clsx from "clsx";
-import { Section, Text } from "#shared/ui";
-import { WeatherIcon } from "../WeatherIcon/WeatherIcon.tsx";
-import { mockWeeklyForecast } from "./mock";
+import { Icon, Section, Text } from "#shared/ui";
 import styles from "./WeeklyForecast.module.css";
 
-export function WeeklyForecast() {
+interface Props {
+  forecast: Array<{
+    date: string;
+    condition: {
+      text: string;
+      code: string; // TODO: Вместо кода получать сразу иконку?
+    };
+    temperature: {
+      avg: {
+        celsius: string;
+        fahrenheit: string;
+      };
+      min: {
+        celsius: string;
+        fahrenheit: string;
+      };
+    };
+  }>;
+}
+
+export function WeeklyForecast({ forecast }: Props) {
   return (
     <Section heading="Weekly forecast" headingLevel="h2">
       <ul className={styles.list}>
-        {mockWeeklyForecast.map((day, index) => (
+        {forecast.map((day, index) => (
           <li
             className={clsx(styles.item, { [styles.weekend]: index % 2 === 0 })}
             key={day.date}
@@ -18,19 +36,18 @@ export function WeeklyForecast() {
                 {day.date}
               </Text>
               <Text as="p" className={styles.day} weight="bold">
-                {day.day}
+                {day.date}
               </Text>
             </div>
-            <WeatherIcon
-              code={day.code}
-              isDay={day.isDay}
+            <Icon.Weather
+              name={day.condition.code}
               size={"2.25em"}
-              title={day.condition}
+              title={day.condition.text}
             />
-            <Text className={styles.condition}>{day.condition}</Text>
+            <Text className={styles.condition}>{day.condition.text}</Text>
             <Text as="p" className={styles.temperature}>
-              <Text weight="bold">{day.tempMax}</Text>
-              {day.tempMin}
+              <Text weight="bold">{day.temperature.avg.celsius}</Text>
+              {day.temperature.min.celsius}
             </Text>
           </li>
         ))}
