@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { type ChangeEvent, type FormEvent, useRef, useState } from "react";
-import { useDebounce } from "#shared/lib/debounce";
+import { useDebounce } from "#shared/lib/react";
 import { Icon } from "#shared/ui";
 import { queries } from "../../api/queries.ts";
 import { SearchSuggestions } from "../SearchSuggestions/SearchSuggestions.tsx";
@@ -23,7 +23,9 @@ interface Props {
  *  5. (Предложение) Добавить hook state с функцией reset;
  *  6. (Баг) Пока данные не прешли происходит моргание подсказок;
  *  7. (Баг) Задержка debounce также отрабатывает на скрытие подсказок;
- *  8. (Баг) Если в поиск задать неправильное название, API может выдать максимально похожий
+ *  8. (Баг) Поиск города происходит только по городу, без страны. Поэтому при выборе
+ *     "Москва США", прогноз погоды будет для "Москва Россия";
+ *  9. (Баг) Если в поиск задать неправильное название, API может выдать максимально похожий
  *     город, но в строке поиска будет введённое пользователем неверное название;
  * */
 
