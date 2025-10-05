@@ -5,6 +5,7 @@
   padding: 6px;
   font: inherit;
   color: inherit;
+  text-align: left;
   cursor: pointer;
   background-color: var(--foreground-color);
   border: none;

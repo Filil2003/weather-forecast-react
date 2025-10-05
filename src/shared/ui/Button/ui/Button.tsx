@@ -8,11 +8,12 @@ interface Props extends ComponentProps<"button"> {
 
 export function Button({
   children,
+  className,
   shape = "normal",
   type = "button",
   ...restProps
 }: Props) {
-  const classNames = clsx(styles.button, styles[shape]);
+  const classNames = clsx(styles.button, styles[shape], className);
 
   return (
     <button className={classNames} type={type} {...restProps}>
