@@ -3,11 +3,7 @@ export interface LocationSearchParams {
   q: string;
 }
 
-export interface LocationSearchResponse {
-  results: LocationSearchResult[];
-}
-
-export interface LocationSearchResult {
+export type LocationSearchResponse = Array<{
   id: number;
   name: string;
   region: string;
@@ -15,7 +11,7 @@ export interface LocationSearchResult {
   lat: number;
   lon: number;
   url: string;
-}
+}>;
 
 /* --- Forecast API --- */
 export interface WeatherForecastParams {

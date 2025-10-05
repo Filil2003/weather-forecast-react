@@ -1,0 +1,29 @@
+.list {
+  position: absolute;
+  top: calc(100% + 0.5em);
+  right: 0;
+  left: 0;
+  display: grid;
+  overflow: hidden;
+  background-color: var(--foreground-color);
+  border-radius: 22px;
+  backdrop-filter: blur(50px);
+}
+
+.item:focus-within {
+  color: lightskyblue;
+}
+
+.item:not(:first-child) {
+  box-shadow: inset 0 1px currentColor;
+}
+
+/* TODO: Придумать как выделять при наведении, при Tab. Продумать как быть с разделительной линией*/
+.button {
+  width: 100%;
+  padding: 0.875em 1em;
+  text-wrap: balance;
+  outline: none;
+  background-color: transparent;
+  border-radius: 0;
+}
