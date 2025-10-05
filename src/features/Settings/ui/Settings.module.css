@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+}
+
+.settings {
+  position: absolute;
+  top: calc(100% + 0.5em);
+  right: 0;
+  width: max-content;
+  background-color: var(--foreground-color);
+  border-radius: 22px;
+  backdrop-filter: blur(50px);
+
+  & select {
+    color: black;
+  }
+}
