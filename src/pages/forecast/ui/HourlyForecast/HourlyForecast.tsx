@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { type JSX, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Heading, Icon, Section, Text } from "#shared/ui";
 import styles from "./HourlyForecast.module.css";
 
@@ -6,10 +7,7 @@ interface Props {
   forecast: Array<{
     // id: string; // crypto.randomUUID()
     time: string;
-    condition: {
-      text: string;
-      code: string; // TODO: Вместо кода получать сразу иконку?
-    };
+    icon: JSX.Element;
     temperature: {
       celsius: string;
       fahrenheit: string;
@@ -20,6 +18,7 @@ interface Props {
 }
 
 export function HourlyForecast({ forecast }: Props) {
+  const { t } = useTranslation();
   const listRef = useRef<HTMLUListElement | null>(null);
 
   function handlePrev() {
@@ -41,7 +40,7 @@ export function HourlyForecast({ forecast }: Props) {
   }
 
   return (
-    <Section heading="Hourly forecast" headingLevel="h2">
+    <Section heading={t("hourly.title")} headingLevel="h2">
       <div className={styles.slider}>
         <Button onClick={handlePrev} shape="round">
           <Icon.Common name="ArrowLeft" title="Scroll left" />
@@ -49,12 +48,12 @@ export function HourlyForecast({ forecast }: Props) {
         <ul className={styles.list} ref={listRef}>
           {forecast.map((hour) => (
             <li className={styles.item} key={hour.time}>
-              <Text as="p">{hour.time}</Text>
-              <Icon.Weather
-                name={hour.condition.code}
-                size={"3em"}
-                title={hour.condition.text}
-              />
+              <Text as="p">
+                {t("hourly.time", {
+                  time: new Date(hour.time),
+                })}
+              </Text>
+              {hour.icon}
               <Heading as="h3" variant="small">
                 {hour.temperature.celsius}
               </Heading>

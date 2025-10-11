@@ -1,0 +1,25 @@
+{
+  "current": {
+    "feelsLike": "Feels like {{temperature, string}}",
+    "humidity": "Humidity",
+    "precipitation": "Precipitation",
+    "pressure": "Pressure",
+    "title": "Current weather",
+    "ultraviolet": "Ultraviolet",
+    "uv-index": "<abbr>UV</abbr> Index",
+    "visibility": "Visibility",
+    "wind": "Wind"
+  },
+  "hourly": {
+    "time": "{{time, datetime(hour: 'numeric')}}",
+    "title": "Hourly forecast"
+  },
+  "meta": {
+    "title": "Weather forecast"
+  },
+  "weekly": {
+    "date": "{{date, datetime(day: 'numeric'; month: 'long')}}",
+    "day": "{{date, datetime(weekday: 'long')}}",
+    "title": "Three-day forecast"
+  }
+}

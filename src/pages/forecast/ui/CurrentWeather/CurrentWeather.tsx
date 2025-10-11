@@ -1,12 +1,12 @@
+import type { JSX } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { Heading, Icon, Section, Text } from "#shared/ui";
 import styles from "./CurrentWeather.module.css";
 
 export interface Props {
   weather: {
-    condition: {
-      text: string;
-      code: string; // TODO: Вместо кода получать сразу иконку?
-    };
+    condition: string;
+    icon: JSX.Element;
     temperature: {
       actual: {
         celsius: string;
@@ -39,12 +39,14 @@ export interface Props {
 }
 
 export function CurrentWeather({
-  weather: { condition, temperature, ...stats },
+  weather: { condition, icon, temperature, ...stats },
 }: Props) {
+  const { t } = useTranslation();
+
   return (
-    <Section heading="Current forecast" headingLevel="h2" hideHeading={true}>
+    <Section heading={t("current.title")} headingLevel="h2" hideHeading={true}>
       <Heading as="h3" variant="medium">
-        {condition.text}
+        {condition}
       </Heading>
       <div className={styles.condition}>
         <div className={styles.temperature}>
@@ -52,16 +54,18 @@ export function CurrentWeather({
             {temperature.actual.celsius}
           </Heading>
           <Heading as="h3" variant="small">
-            Feels like {temperature.feelsLike.celsius}
+            {t("current.feelsLike", {
+              temperature: temperature.feelsLike.celsius,
+            })}
           </Heading>
         </div>
-        <Icon.Weather name={condition.code} size={82} title={condition.text} />
+        {icon}
       </div>
       <ul className={styles.list}>
         <li className={styles.item}>
           <Text as="p" className={styles.title}>
-            <Icon.Common name="Wind" size={"1em"} title="Wind" />
-            Wind
+            <Icon.Common name="Wind" size={"1em"} title={t("current.wind")} />
+            {t("current.wind")}
           </Text>
           <Text as="p" weight="bold">
             {stats.wind.metric}
@@ -69,8 +73,12 @@ export function CurrentWeather({
         </li>
         <li className={styles.item}>
           <Text as="p" className={styles.title}>
-            <Icon.Common name="Humidity" size={"1em"} title="Humidity" />
-            Humidity
+            <Icon.Common
+              name="Humidity"
+              size={"1em"}
+              title={t("current.humidity")}
+            />
+            {t("current.humidity")}
           </Text>
           <Text as="p" weight="bold">
             {stats.humidity}
@@ -78,8 +86,12 @@ export function CurrentWeather({
         </li>
         <li className={styles.item}>
           <Text as="p" className={styles.title}>
-            <Icon.Common name="Pressure" size={"1em"} title="Pressure" />
-            Pressure
+            <Icon.Common
+              name="Pressure"
+              size={"1em"}
+              title={t("current.pressure")}
+            />
+            {t("current.pressure")}
           </Text>
           <Text as="p" weight="bold">
             {stats.pressure.metric}
@@ -90,9 +102,9 @@ export function CurrentWeather({
             <Icon.Common
               name="Precipitation"
               size={"1em"}
-              title="Precipitation"
+              title={t("current.precipitation")}
             />
-            Precipitation
+            {t("current.precipitation")}
           </Text>
           <Text as="p" weight="bold">
             {stats.precipitation.metric}
@@ -100,8 +112,12 @@ export function CurrentWeather({
         </li>
         <li className={styles.item}>
           <Text as="p" className={styles.title}>
-            <Icon.Common name="Visibility" size={"1em"} title="Visibility" />
-            Visibility
+            <Icon.Common
+              name="Visibility"
+              size={"1em"}
+              title={t("current.visibility")}
+            />
+            {t("current.visibility")}
           </Text>
           <Text as="p" weight="bold">
             {stats.visibility.metric}
@@ -114,7 +130,15 @@ export function CurrentWeather({
               size={"1em"}
               title="Ultraviolet index"
             />
-            UV Index
+            <span>
+              <Trans
+                components={{
+                  abbr: <abbr title={t("current.ultraviolet")} />,
+                }}
+                i18nKey="current.uv-index"
+                t={t}
+              />
+            </span>
           </Text>
           <Text as="p" weight="bold">
             {stats.ultravioletIndex}

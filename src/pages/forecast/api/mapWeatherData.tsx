@@ -1,11 +1,14 @@
 import type { WeatherForecastResponse } from "#shared/api";
+import { Icon } from "#shared/ui";
 
 export function mapWeatherData(data: WeatherForecastResponse) {
   const current = {
-    condition: {
-      text: data.current.condition.text,
-      code: `${1000}-${data.current.is_day ? "day" : "night"}`, // TODO: Replace after adding all icons
-    },
+    condition: data.current.condition.text,
+    icon: formatIcon(
+      data.current.condition.text,
+      data.current.condition.code,
+      Boolean(data.current.is_day),
+    ),
     temperature: {
       actual: formatTemperature(data.current.temp_c, data.current.temp_f),
       feelsLike: formatTemperature(
@@ -33,45 +36,29 @@ export function mapWeatherData(data: WeatherForecastResponse) {
     ultravioletIndex: data.current.uv,
   };
 
-  const currentTime = new Date(data.current.last_updated).getTime();
+  const currentHour = new Date(data.current.last_updated);
+  currentHour.setMinutes(0, 0, 0);
 
   const hourly = data.forecast.forecastday
     .flatMap((day) => day.hour)
-    .filter((hour) => new Date(hour.time).getTime() >= currentTime)
+    .filter((hour) => new Date(hour.time).getTime() >= currentHour.getTime())
     .slice(0, 24)
-    .map((hour, index) => {
-      const date = new Date(hour.time);
-      const isRussian = navigator.language.startsWith("ru");
-
-      const formattedTime =
-        index === 0
-          ? isRussian
-            ? "Сейчас"
-            : "Now"
-          : new Intl.DateTimeFormat(navigator.language, {
-              hour: "numeric",
-              minute: isRussian ? "2-digit" : undefined, // 10:00 для ru
-              hour12: !isRussian, // AM/PM для не-ru
-            }).format(date);
-
-      return {
-        time: formattedTime,
-        condition: {
-          text: hour.condition.text,
-          code: `${1000}-${hour.is_day ? "day" : "night"}`,
-        },
-        temperature: formatTemperature(hour.temp_c, hour.temp_f),
-        chanceOfRain: hour.chance_of_rain,
-        chanceOfSnow: hour.chance_of_snow,
-      };
-    });
+    .map((hour) => ({
+      time: hour.time,
+      icon: formatIcon(
+        hour.condition.text,
+        hour.condition.code,
+        Boolean(hour.is_day),
+      ),
+      temperature: formatTemperature(hour.temp_c, hour.temp_f),
+      chanceOfRain: hour.chance_of_rain,
+      chanceOfSnow: hour.chance_of_snow,
+    }));
 
   const weekly = data.forecast.forecastday.map(({ date, day }) => ({
     date: date,
-    condition: {
-      text: day.condition.text,
-      code: `${1000}-day`, // TODO: Replace after adding all icons
-    },
+    condition: day.condition.text,
+    icon: formatIcon(day.condition.text, day.condition.code, true),
     temperature: {
       avg: formatTemperature(day.avgtemp_c, day.avgtemp_f),
       min: formatTemperature(day.mintemp_c, day.mintemp_f),
@@ -91,4 +78,14 @@ function formatTemperature(celsius: number, fahrenheit: number) {
     celsius: format(celsius, "°C"),
     fahrenheit: format(fahrenheit, "°F"),
   };
+}
+
+function formatIcon(text: string, code: number, isDay: boolean) {
+  return (
+    <Icon.Weather
+      name={`${code}-${isDay ? "day" : "night"}`}
+      size={"3em"}
+      title={text}
+    />
+  );
 }

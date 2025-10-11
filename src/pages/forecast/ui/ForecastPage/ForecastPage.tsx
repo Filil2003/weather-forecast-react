@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useSettingsStore } from "#shared/model";
+import { useTranslation } from "react-i18next";
+import { useDocumentTitle } from "#shared/lib/react";
+import { Footer } from "#widgets/Footer";
 import { Header } from "#widgets/Header";
 import { weatherQueries } from "../../api/weatherQueries.ts";
 import { CurrentWeather } from "../CurrentWeather/CurrentWeather.tsx";
@@ -9,15 +11,16 @@ import { WeeklyForecast } from "../WeeklyForecast/WeeklyForecast.tsx";
 
 export function ForecastPage() {
   const [city, setCity] = useState("Санкт-Петербург");
-  const preferredLanguage = useSettingsStore((state) => state.language);
-
+  const { t, i18n } = useTranslation();
   const { data } = useQuery(
     weatherQueries.forecast({
       q: city,
       days: 3,
-      lang: preferredLanguage,
+      lang: i18n.language,
     }),
   );
+
+  useDocumentTitle(t("meta.title"));
 
   return (
     <>
@@ -31,6 +34,7 @@ export function ForecastPage() {
           </>
         )}
       </main>
+      <Footer />
     </>
   );
 }

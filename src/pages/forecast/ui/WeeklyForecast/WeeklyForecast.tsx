@@ -1,14 +1,14 @@
 import clsx from "clsx";
-import { Icon, Section, Text } from "#shared/ui";
+import type { JSX } from "react";
+import { useTranslation } from "react-i18next";
+import { Section, Text } from "#shared/ui";
 import styles from "./WeeklyForecast.module.css";
 
 interface Props {
   forecast: Array<{
     date: string;
-    condition: {
-      text: string;
-      code: string; // TODO: Вместо кода получать сразу иконку?
-    };
+    condition: string;
+    icon: JSX.Element;
     temperature: {
       avg: {
         celsius: string;
@@ -23,8 +23,10 @@ interface Props {
 }
 
 export function WeeklyForecast({ forecast }: Props) {
+  const { t } = useTranslation();
+
   return (
-    <Section heading="Weekly forecast" headingLevel="h2">
+    <Section heading={t("weekly.title")} headingLevel="h2">
       <ul className={styles.list}>
         {forecast.map((day, index) => (
           <li
@@ -33,18 +35,18 @@ export function WeeklyForecast({ forecast }: Props) {
           >
             <div>
               <Text as="p" className={styles.date} variant="caption">
-                {day.date}
+                {t("weekly.date", {
+                  date: new Date(day.date),
+                })}
               </Text>
               <Text as="p" className={styles.day} weight="bold">
-                {day.date}
+                {t("weekly.day", {
+                  date: new Date(day.date),
+                })}
               </Text>
             </div>
-            <Icon.Weather
-              name={day.condition.code}
-              size={"2.25em"}
-              title={day.condition.text}
-            />
-            <Text className={styles.condition}>{day.condition.text}</Text>
+            {day.icon}
+            <Text className={styles.condition}>{day.condition}</Text>
             <Text as="p" className={styles.temperature}>
               <Text weight="bold">{day.temperature.avg.celsius}</Text>
               {day.temperature.min.celsius}

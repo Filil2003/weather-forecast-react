@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { useSettingsStore } from "#shared/model";
 import { Button, Icon } from "#shared/ui";
+import { LocaleSwitcher } from "./LocaleSwitcher.tsx";
 import styles from "./Settings.module.css";
 
 export function Settings() {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Достаём всё нужное из стора
   const {
-    language,
     theme,
     temperatureUnit,
     measurementSystem,
-    setLanguage,
     setTheme,
     setTemperatureUnit,
     setMeasurementSystem,
@@ -35,13 +33,7 @@ export function Settings() {
           {/* Язык */}
           <div>
             <label htmlFor="language">Язык:</label>
-            <select
-              onChange={(e) => setLanguage(e.target.value as "ru" | "en-US")}
-              value={language}
-            >
-              <option value="ru">Русский</option>
-              <option value="en-US">English</option>
-            </select>
+            <LocaleSwitcher />
           </div>
 
           {/* Тема */}

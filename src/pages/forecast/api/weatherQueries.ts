@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { apiClient, type WeatherForecastParams } from "#shared/api";
-import { mapWeatherData } from "./mapWeatherData.ts";
+import { mapWeatherData } from "./mapWeatherData.tsx";
 
 export const weatherQueries = {
   forecast: (params: WeatherForecastParams) =>

@@ -12,7 +12,7 @@
     [icon] min-content
     [temperature] max-content
     [precipitation] max-content;
-  grid-auto-columns: min-content;
+  grid-auto-columns: 96px;
   grid-auto-flow: column;
   gap: 0.5em;
   overflow: hidden;
@@ -22,7 +22,7 @@
   display: grid;
   grid-template-rows: subgrid;
   grid-row: 1 / -1;
-  justify-content: center;
+  justify-items: center;
   padding: 0.5em 1em;
   text-align: center;
   white-space: nowrap;

@@ -1,0 +1,25 @@
+{
+  "current": {
+    "feelsLike": "يُشعَر به كـ {{temperature, string}}",
+    "humidity": "الرطوبة",
+    "precipitation": "الهطول",
+    "pressure": "الضغط",
+    "title": "الطقس الحالي",
+    "ultraviolet": "الأشعة فوق البنفسجية",
+    "uv-index": "<abbr>UV</abbr> مؤشر",
+    "visibility": "مدى الرؤية",
+    "wind": "الرياح"
+  },
+  "hourly": {
+    "time": "{{time, datetime(timeStyle: 'short')}}",
+    "title": "توقعات كل ساعة"
+  },
+  "meta": {
+    "title": "توقعات الطقس"
+  },
+  "weekly": {
+    "date": "{{date, datetime(day: 'numeric'; month: 'long')}}",
+    "day": "{{date, datetime(weekday: 'long')}}",
+    "title": "توقعات الأيام الثلاثة"
+  }
+}
