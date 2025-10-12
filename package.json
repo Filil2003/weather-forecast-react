@@ -5,8 +5,8 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "check": "biome check",
-    "check:fix": "biome check --fix",
+    "check": "biome check --no-errors-on-unmatched",
+    "check:fix": "npm run check -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
