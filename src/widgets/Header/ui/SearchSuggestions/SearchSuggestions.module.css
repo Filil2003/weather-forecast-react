@@ -1,8 +1,7 @@
 .list {
   position: absolute;
+  inset-inline: 0;
   top: calc(100% + 0.5em);
-  right: 0;
-  left: 0;
   display: grid;
   overflow: hidden;
   background-color: var(--foreground-color);

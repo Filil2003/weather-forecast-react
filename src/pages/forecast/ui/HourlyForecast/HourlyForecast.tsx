@@ -1,4 +1,4 @@
-import { type JSX, useRef } from "react";
+import { type JSX, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Heading, Icon, Section, Text } from "#shared/ui";
 import styles from "./HourlyForecast.module.css";
@@ -18,32 +18,36 @@ interface Props {
 }
 
 export function HourlyForecast({ forecast }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const listRef = useRef<HTMLUListElement | null>(null);
 
-  function handlePrev() {
-    if (!listRef.current) return;
+  const scrollList = useCallback(
+    (direction: "next" | "prev") => {
+      if (!listRef.current) return;
 
-    listRef.current.scrollBy({
-      left: -listRef.current.clientWidth,
-      behavior: "smooth",
-    });
-  }
+      const scrollAmount = listRef.current.clientWidth;
+      const isRTL = i18n.dir(i18n.resolvedLanguage) === "rtl";
 
-  function handleNext() {
-    if (!listRef.current) return;
+      const delta =
+        (direction === "next" ? 1 : -1) * scrollAmount * (isRTL ? -1 : 1);
 
-    listRef.current.scrollBy({
-      left: listRef.current.clientWidth,
-      behavior: "smooth",
-    });
-  }
+      listRef.current.scrollBy({
+        left: delta,
+        behavior: "smooth",
+      });
+    },
+    [i18n],
+  );
 
   return (
     <Section heading={t("hourly.title")} headingLevel="h2">
       <div className={styles.slider}>
-        <Button onClick={handlePrev} shape="round">
-          <Icon.Common name="ArrowLeft" title="Scroll left" />
+        <Button onClick={() => scrollList("prev")} shape="round">
+          <Icon.Common
+            dirSensitive={true}
+            name="ArrowLeft"
+            title="Scroll next"
+          />
         </Button>
         <ul className={styles.list} ref={listRef}>
           {forecast.map((hour) => (
@@ -64,8 +68,12 @@ export function HourlyForecast({ forecast }: Props) {
             </li>
           ))}
         </ul>
-        <Button onClick={handleNext} shape="round">
-          <Icon.Common name="ArrowRight" title="Scroll right" />
+        <Button onClick={() => scrollList("next")} shape="round">
+          <Icon.Common
+            dirSensitive={true}
+            name="ArrowRight"
+            title="Scroll previous"
+          />
         </Button>
       </div>
     </Section>

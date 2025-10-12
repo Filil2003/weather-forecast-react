@@ -1,0 +1,3 @@
+.dirSensitive:dir(rtl) {
+  transform: scaleX(-1);
+}
