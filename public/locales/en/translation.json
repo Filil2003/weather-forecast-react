@@ -12,7 +12,11 @@
   },
   "hourly": {
     "time": "{{time, datetime(hour: 'numeric')}}",
-    "title": "Hourly forecast"
+    "title": "Hourly forecast",
+    "button": {
+      "next": "Scroll next",
+      "prev": "Scroll previous"
+    }
   },
   "meta": {
     "title": "Weather forecast"

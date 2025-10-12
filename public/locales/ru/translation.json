@@ -12,7 +12,11 @@
   },
   "hourly": {
     "time": "{{time, datetime(timeStyle: 'short')}}",
-    "title": "Почасовой прогноз"
+    "title": "Почасовой прогноз",
+    "button": {
+      "next": "Прокрутить вперед",
+      "prev": "Прокрутить назад"
+    }
   },
   "meta": {
     "title": "Прогноз погоды"

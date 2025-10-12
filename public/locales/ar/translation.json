@@ -12,7 +12,11 @@
   },
   "hourly": {
     "time": "{{time, datetime(timeStyle: 'short')}}",
-    "title": "توقعات كل ساعة"
+    "title": "توقعات كل ساعة",
+    "button": {
+      "next": "التمرير للأمام",
+      "prev": "التمرير للخلف"
+    }
   },
   "meta": {
     "title": "توقعات الطقس"
