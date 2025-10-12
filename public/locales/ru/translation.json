@@ -21,5 +21,8 @@
     "date": "{{date, datetime(day: 'numeric'; month: 'long')}}",
     "day": "{{date, datetime(weekday: 'long')}}",
     "title": "Прогноз на три дня"
+  },
+  "footer": {
+    "weather-data-source": "Данные о погоде предоставлены"
   }
 }

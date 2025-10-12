@@ -21,5 +21,8 @@
     "date": "{{date, datetime(day: 'numeric'; month: 'long')}}",
     "day": "{{date, datetime(weekday: 'long')}}",
     "title": "Three-day forecast"
+  },
+  "footer": {
+    "weather-data-source": "Weather data provided by"
   }
 }
