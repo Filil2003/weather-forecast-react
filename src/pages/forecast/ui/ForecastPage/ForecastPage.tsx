@@ -12,16 +12,16 @@ import { HourlyForecast } from "../HourlyForecast/HourlyForecast.tsx";
 import { WeeklyForecast } from "../WeeklyForecast/WeeklyForecast.tsx";
 
 export function ForecastPage() {
-  const [city, setCity] = useState("Санкт-Петербург");
   const { t, i18n } = useTranslation();
+  useDocumentTitle(t("document.title"));
+
+  const [city, setCity] = useState("Санкт-Петербург");
   const { data, error, isError } = useQuery(
     queries.forecast({
       q: city,
       lang: i18n.language,
     }),
   );
-
-  useDocumentTitle(t("meta.title"));
 
   if (isError) {
     if (error instanceof WeatherApiError) {

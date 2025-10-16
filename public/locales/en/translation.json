@@ -58,7 +58,7 @@
       "prev": "Scroll previous"
     }
   },
-  "meta": {
+  "document": {
     "title": "Weather forecast"
   },
   "weekly": {
