@@ -1,19 +1,14 @@
 import { queryOptions, skipToken } from "@tanstack/react-query";
-import { apiClient, type LocationSearchParams } from "#shared/api";
+import { weatherApiClient } from "#shared/api/weather";
+
+type Query = Parameters<typeof weatherApiClient.search>[0];
 
 export const queries = {
-  search: (params: LocationSearchParams) =>
+  search: (query: Query) =>
     queryOptions({
-      queryKey: ["location", params.q],
-      queryFn: params.q.trim()
-        ? async () => {
-            const response = await apiClient.searchLocation(params);
-            console.log(response);
-            if ("error" in response) throw new Error(response.error.message);
-            return response;
-          }
+      queryKey: ["search", query.q],
+      queryFn: query.q.trim()
+        ? async () => weatherApiClient.search(query)
         : skipToken,
-      select: (data) =>
-        data.map(({ id, name, country }) => ({ id, name, country })),
     }),
 };
