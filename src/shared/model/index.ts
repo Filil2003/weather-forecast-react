@@ -1,1 +1,5 @@
-export { useSettingsStore } from "./useSettingsStore.ts";
+export {
+  getMeasurementSystem,
+  getTemperatureUnit,
+  useSettingsStore,
+} from "./settingsStore.ts";

@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useDocumentTitle } from "#shared/lib/react";
 import { Footer } from "#widgets/Footer";
 import { Header } from "#widgets/Header";
-import { weatherQueries } from "../../api/weatherQueries.ts";
+import { fromDto } from "../../api/fromDto.ts";
+import { queries } from "../../api/queries.ts";
 import { CurrentWeather } from "../CurrentWeather/CurrentWeather.tsx";
 import { HourlyForecast } from "../HourlyForecast/HourlyForecast.tsx";
 import { WeeklyForecast } from "../WeeklyForecast/WeeklyForecast.tsx";
@@ -13,14 +14,17 @@ export function ForecastPage() {
   const [city, setCity] = useState("Санкт-Петербург");
   const { t, i18n } = useTranslation();
   const { data } = useQuery(
-    weatherQueries.forecast({
+    queries.forecast({
       q: city,
-      days: 3,
       lang: i18n.language,
     }),
   );
 
   useDocumentTitle(t("meta.title"));
+
+  if (!data) return <div>Loading...</div>;
+
+  const { current, hourly, weekly } = fromDto(data);
 
   return (
     <>
@@ -28,9 +32,9 @@ export function ForecastPage() {
       <main>
         {data && (
           <>
-            <CurrentWeather weather={data.current} />
-            <HourlyForecast forecast={data.hourly} />
-            <WeeklyForecast forecast={data.weekly} />
+            <CurrentWeather weather={current} />
+            <HourlyForecast forecast={hourly} />
+            <WeeklyForecast forecast={weekly} />
           </>
         )}
       </main>

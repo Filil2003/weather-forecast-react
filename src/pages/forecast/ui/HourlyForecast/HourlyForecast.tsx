@@ -1,20 +1,11 @@
-import { type JSX, useCallback, useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Heading, Icon, Section, Text } from "#shared/ui";
+import type { Hour } from "../../model";
 import styles from "./HourlyForecast.module.css";
 
 interface Props {
-  forecast: Array<{
-    // id: string; // crypto.randomUUID()
-    time: string;
-    icon: JSX.Element;
-    temperature: {
-      celsius: string;
-      fahrenheit: string;
-    };
-    chanceOfRain: number;
-    chanceOfSnow: number;
-  }>;
+  forecast: Hour[];
 }
 
 export function HourlyForecast({ forecast }: Props) {
@@ -59,7 +50,7 @@ export function HourlyForecast({ forecast }: Props) {
               </Text>
               {hour.icon}
               <Heading as="h3" variant="small">
-                {hour.temperature.celsius}
+                {hour.temperature}
               </Heading>
               <Text as="p" className={styles.precipitation} variant="caption">
                 <Icon.Common name="Raindrop" size={"1rem"} title="Raindrop" />

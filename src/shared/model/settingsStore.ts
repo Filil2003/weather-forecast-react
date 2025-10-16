@@ -17,10 +17,10 @@ interface Actions {
   setMeasurementSystem: (system: MeasurementSystem) => void;
 }
 
-type UseSettingsStore = State & Actions;
+type SettingsStore = State & Actions;
 
 const slice: StateCreator<
-  UseSettingsStore,
+  SettingsStore,
   [["zustand/devtools", never], ["zustand/persist", unknown]]
 > = (setState) => ({
   theme: "system",
@@ -42,6 +42,12 @@ const slice: StateCreator<
     ),
 });
 
-export const useSettingsStore = create<UseSettingsStore>()(
+export const useSettingsStore = create<SettingsStore>()(
   devtools(persist(slice, { name: "settings" }), { name: "SettingsStore" }),
 );
+
+export const getTemperatureUnit = () =>
+  useSettingsStore.getState().temperatureUnit;
+
+export const getMeasurementSystem = () =>
+  useSettingsStore.getState().measurementSystem;

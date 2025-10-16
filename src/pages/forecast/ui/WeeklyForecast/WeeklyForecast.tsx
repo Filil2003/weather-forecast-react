@@ -1,25 +1,11 @@
 import clsx from "clsx";
-import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
 import { Section, Text } from "#shared/ui";
+import type { Day } from "../../model";
 import styles from "./WeeklyForecast.module.css";
 
 interface Props {
-  forecast: Array<{
-    date: string;
-    condition: string;
-    icon: JSX.Element;
-    temperature: {
-      avg: {
-        celsius: string;
-        fahrenheit: string;
-      };
-      min: {
-        celsius: string;
-        fahrenheit: string;
-      };
-    };
-  }>;
+  forecast: Day[];
 }
 
 export function WeeklyForecast({ forecast }: Props) {
@@ -48,8 +34,8 @@ export function WeeklyForecast({ forecast }: Props) {
             {day.icon}
             <Text className={styles.condition}>{day.condition}</Text>
             <Text as="p" className={styles.temperature}>
-              <Text weight="bold">{day.temperature.avg.celsius}</Text>
-              {day.temperature.min.celsius}
+              <Text weight="bold">{day.temperature.avg}</Text>
+              {day.temperature.min}
             </Text>
           </li>
         ))}
