@@ -1,6 +1,6 @@
 .condition {
   display: flex;
-  text-align: right;
+  text-align: end;
 }
 
 .temperature {
@@ -18,9 +18,14 @@
   padding: 0.5em;
   background-color: var(--foreground-color);
   border-radius: var(--radius-md);
-}
 
-.title {
-  display: inline-flex;
-  gap: 0.25em;
+  & dt {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  & dd {
+    font-weight: bold;
+  }
 }

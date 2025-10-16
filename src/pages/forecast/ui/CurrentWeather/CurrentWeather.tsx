@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "#shared/model";
-import { Heading, Section, Text } from "#shared/ui";
+import { Heading, Icon, Section } from "#shared/ui";
 import type { Weather } from "../../model";
 import styles from "./CurrentWeather.module.css";
 
@@ -35,23 +35,22 @@ export function CurrentWeather({
         {icon}
       </div>
       {/* --- Stats --- */}
-      <ul className={styles.list}>
+      <dl className={styles.list}>
         {Object.entries(stats).map(([key, value]) => (
-          <li className={styles.item} key={key}>
-            <Text as="p" className={styles.title}>
+          <div className={styles.item} key={key}>
+            <dt>
+              <Icon.Common aria-hidden="true" name={key} size="1em" />
               {t(`current.stats.${key}.title`)}
-            </Text>
-            <Text as="p" weight="bold">
+            </dt>
+            <dd>
               {t(`current.stats.${key}.unit.${measurementSystem}`, {
                 value,
-                defaultValue: t(`current.stats.${key}.unit`, {
-                  value,
-                }),
+                defaultValue: t(`current.stats.${key}.unit`, { value }),
               })}
-            </Text>
-          </li>
+            </dd>
+          </div>
         ))}
-      </ul>
+      </dl>
     </Section>
   );
 }
