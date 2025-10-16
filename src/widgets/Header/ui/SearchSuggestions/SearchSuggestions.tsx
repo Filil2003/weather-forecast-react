@@ -20,7 +20,7 @@ export function SearchSuggestions({ suggestions, onSelect }: Props) {
       {suggestions.map(({ id, name, country }) => (
         <li className={styles.item} key={id}>
           <Button className={styles.button} onClick={() => onSelect(name)}>
-            <Icon.Common name="Location" title="Location" />
+            <Icon.Common name="location" title="Location" />
             <div>
               <Text as="p" weight="medium">
                 {name}

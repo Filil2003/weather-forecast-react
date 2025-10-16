@@ -36,7 +36,7 @@ export function HourlyForecast({ forecast }: Props) {
         <Button onClick={() => scrollList("prev")} shape="round">
           <Icon.Common
             dirSensitive={true}
-            name="ArrowLeft"
+            name="arrowLeft"
             title={t("hourly.button.next")}
           />
         </Button>
@@ -53,7 +53,7 @@ export function HourlyForecast({ forecast }: Props) {
                 {hour.temperature}
               </Heading>
               <Text as="p" className={styles.precipitation} variant="caption">
-                <Icon.Common name="Raindrop" size={"1rem"} title="Raindrop" />
+                <Icon.Common name="raindrop" size={"1rem"} title="Raindrop" />
                 {hour.chanceOfRain}
               </Text>
             </li>
@@ -62,7 +62,7 @@ export function HourlyForecast({ forecast }: Props) {
         <Button onClick={() => scrollList("next")} shape="round">
           <Icon.Common
             dirSensitive={true}
-            name="ArrowRight"
+            name="arrowRight"
             title={t("hourly.button.prev")}
           />
         </Button>

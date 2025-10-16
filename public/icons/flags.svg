@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg">
-  <symbol id="RU" viewBox="0 0 24 24">
-    <mask id="mask_RU" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+  <symbol id="ru" viewBox="0 0 24 24">
+    <mask id="mask_ru" style="mask-type:luminance" maskUnits="userSpaceOnUse"
           x="0" y="4" width="24" height="16">
       <path
         d="M0 5.8413C0 4.82435 0.89543 4 2 4H22C23.1046 4 24 4.82438 24 5.8413V18.1587C24 19.1756 23.1046 20 22 20H2C0.8954 20 0 19.1756 0 18.1587V5.8413Z"
         fill="#FFF"/>
     </mask>
-    <g mask="url(#mask_RU)">
+    <g mask="url(#mask_ru)">
       <path
         d="M24 18.1589C23.9999 19.1757 23.1043 20 21.9993 20H1.99284C0.939404 20 0.0782191 19.2506 0 18.2995V14.6667H24V18.1589Z"
         fill="#E53B35"/>
@@ -20,14 +20,14 @@
         fill="#F5F5F5"/>
     </g>
   </symbol>
-  <symbol id="US" viewBox="0 0 24 24">
-    <mask id="mask_US" style="mask-type:luminance"
+  <symbol id="us" viewBox="0 0 24 24">
+    <mask id="mask_us" style="mask-type:luminance"
           maskUnits="userSpaceOnUse" x="0" y="4" width="24" height="16">
       <path
         d="M0 5.8413C0 4.82435 0.89543 4 2 4H22C23.1046 4 24 4.82438 24 5.8413V18.1587C24 19.1756 23.1046 20 22 20H2C0.8954 20 0 19.1756 0 18.1587V5.8413Z"
         fill="#FFF"/>
     </mask>
-    <g mask="url(#mask_US)">
+    <g mask="url(#mask_us)">
       <path d="M10.3448 4H24V20.0003H0V11.4666H10.3448V4Z" fill="#FFF"/>
       <path
         d="M0.413793 11.4666V20.0003H0V11.4666H0.413793ZM24 4V20.0003H23.5862V4H24Z"

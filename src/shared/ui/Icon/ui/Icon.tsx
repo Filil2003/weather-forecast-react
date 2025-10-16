@@ -4,31 +4,31 @@ import styles from "./Icon.module.css";
 
 type SpriteIcons = {
   common:
-    | "ArrowDown"
-    | "ArrowLeft"
-    | "ArrowRight"
-    | "Cross"
-    | "Settings"
-    | "History"
-    | "Humidity"
-    | "Location"
-    | "Precipitation"
-    | "Pressure"
-    | "Raindrop"
-    | "Search"
-    | "Snowflake"
-    | "SnowWithRain"
-    | "UVIndex"
-    | "Visibility"
-    | "Wind";
-  flags: "RU" | "US";
+    | "arrowDown"
+    | "arrowLeft"
+    | "arrowRight"
+    | "cross"
+    | "settings"
+    | "history"
+    | "humidity"
+    | "location"
+    | "precipitation"
+    | "pressure"
+    | "raindrop"
+    | "search"
+    | "snowflake"
+    | "ultravioletIndex"
+    | "visibility"
+    | "wind"
+    | string;
+  flags: "ru" | "us";
   weather: string;
 };
 
 type Sprites = keyof SpriteIcons;
 
 interface Props<T extends Sprites> extends ComponentProps<"svg"> {
-  title: string;
+  title?: string;
   sprite: T;
   name: SpriteIcons[T];
   size?: number | string;

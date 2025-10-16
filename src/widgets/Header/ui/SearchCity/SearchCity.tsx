@@ -61,7 +61,7 @@ export function SearchCity({ city, onCityChange }: Props) {
   return (
     <div className={styles.searchBar}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <Icon.Common name="Search" title="Magnifying glass" />
+        <Icon.Common name="search" title="Magnifying glass" />
         <input
           className={styles.input}
           name="city"

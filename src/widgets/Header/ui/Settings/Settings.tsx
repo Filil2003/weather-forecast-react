@@ -23,7 +23,7 @@ export function Settings() {
   return (
     <div className={styles.container}>
       <Button onClick={handleClick} shape="round">
-        <Icon.Common name="Settings" title="Settings" />
+        <Icon.Common name="settings" title="Settings" />
       </Button>
 
       {isVisible && (
