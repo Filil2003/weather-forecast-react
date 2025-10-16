@@ -1,14 +1,54 @@
 {
   "current": {
-    "feelsLike": "يُشعَر به كـ {{temperature, string}}",
-    "humidity": "الرطوبة",
-    "precipitation": "الهطول",
-    "pressure": "الضغط",
     "title": "الطقس الحالي",
-    "ultraviolet": "الأشعة فوق البنفسجية",
-    "uv-index": "<abbr>UV</abbr> مؤشر",
-    "visibility": "مدى الرؤية",
-    "wind": "الرياح"
+    "temperature": {
+      "actual": {
+        "celsius": "{{value, number}}°C",
+        "fahrenheit": "{{value, number}}°F"
+      },
+      "feelsLike": {
+        "celsius": "يُشعَر به كـ {{value, number}}°C",
+        "fahrenheit": "يُشعَر به كـ {{value, number}}°F"
+      }
+    },
+    "stats": {
+      "wind": {
+        "title": "الرياح",
+        "unit": {
+          "metric": "{{value, number}} كم/س",
+          "imperial": "{{value, number}} ميل/س"
+        }
+      },
+      "pressure": {
+        "title": "الضغط",
+        "unit": {
+          "metric": "{{value, number}} مب",
+          "imperial": "{{value, number}} بوصة"
+        }
+      },
+      "precipitation": {
+        "title": "الهطول",
+        "unit": {
+          "metric": "{{value, number}} مم",
+          "imperial": "{{value, number}} بوصة"
+        }
+      },
+      "visibility": {
+        "title": "مدى الرؤية",
+        "unit": {
+          "metric": "{{value, number}} كم",
+          "imperial": "{{value, number}} ميل"
+        }
+      },
+      "humidity": {
+        "title": "الرطوبة",
+        "unit": "{{value, number}}%"
+      },
+      "ultravioletIndex": {
+        "title": "UV مؤشر",
+        "unit": "{{value, number}}"
+      }
+    }
   },
   "hourly": {
     "time": "{{time, datetime(timeStyle: 'short')}}",

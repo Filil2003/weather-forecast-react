@@ -7,10 +7,12 @@ export interface Weather {
     actual: number;
     feelsLike: number;
   };
-  wind: number;
-  pressure: number;
-  precipitation: number;
-  visibility: number;
-  humidity: number;
-  ultravioletIndex: number;
+  stats: {
+    wind: number;
+    pressure: number;
+    precipitation: number;
+    visibility: number;
+    humidity: number;
+    ultravioletIndex: number;
+  };
 }

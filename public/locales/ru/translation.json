@@ -1,14 +1,54 @@
 {
   "current": {
-    "feelsLike": "Ощущается как {{temperature, string}}",
-    "humidity": "Влажность",
-    "precipitation": "Осадки",
-    "pressure": "Давление",
     "title": "Текущая погода",
-    "ultraviolet": "Ультрафиолетовый",
-    "uv-index": "<abbr>УФ</abbr>-индекс",
-    "visibility": "Видимость",
-    "wind": "Ветер"
+    "temperature": {
+      "actual": {
+        "celsius": "{{value, number}}°C",
+        "fahrenheit": "{{value, number}}°F"
+      },
+      "feelsLike": {
+        "celsius": "Ощущается как {{value, number}}°C",
+        "fahrenheit": "Ощущается как {{value, number}}°F"
+      }
+    },
+    "stats": {
+      "wind": {
+        "title": "Ветер",
+        "unit": {
+          "metric": "{{value, number}} км/ч",
+          "imperial": "{{value, number}} миль/ч"
+        }
+      },
+      "pressure": {
+        "title": "Давление",
+        "unit": {
+          "metric": "{{value, number}} мб",
+          "imperial": "{{value, number}} дюйм"
+        }
+      },
+      "precipitation": {
+        "title": "Осадки",
+        "unit": {
+          "metric": "{{value, number}} мм",
+          "imperial": "{{value, number}} дюйм"
+        }
+      },
+      "visibility": {
+        "title": "Видимость",
+        "unit": {
+          "metric": "{{value, number}} км",
+          "imperial": "{{value, number}} миль"
+        }
+      },
+      "humidity": {
+        "title": "Влажность",
+        "unit": "{{value, number}}%"
+      },
+      "ultravioletIndex": {
+        "title": "УФ-индекс",
+        "unit": "{{value, number}}"
+      }
+    }
   },
   "hourly": {
     "time": "{{time, datetime(timeStyle: 'short')}}",

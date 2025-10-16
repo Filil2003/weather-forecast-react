@@ -1,5 +1,6 @@
-import { Trans, useTranslation } from "react-i18next";
-import { Heading, Icon, Section, Text } from "#shared/ui";
+import { useTranslation } from "react-i18next";
+import { useSettingsStore } from "#shared/model";
+import { Heading, Section, Text } from "#shared/ui";
 import type { Weather } from "../../model";
 import styles from "./CurrentWeather.module.css";
 
@@ -8,9 +9,10 @@ interface Props {
 }
 
 export function CurrentWeather({
-  weather: { condition, icon, temperature, ...stats },
+  weather: { condition, icon, temperature, stats },
 }: Props) {
   const { t } = useTranslation();
+  const { measurementSystem, temperatureUnit } = useSettingsStore();
 
   return (
     <Section heading={t("current.title")} headingLevel="h2" hideHeading={true}>
@@ -20,99 +22,35 @@ export function CurrentWeather({
       <div className={styles.condition}>
         <div className={styles.temperature}>
           <Heading as="h3" variant="huge">
-            {temperature.actual}
+            {t(`current.temperature.actual.${temperatureUnit}`, {
+              value: temperature.actual,
+            })}
           </Heading>
           <Heading as="h3" variant="small">
-            {t("current.feelsLike", {
-              temperature: temperature.feelsLike,
+            {t(`current.temperature.feelsLike.${temperatureUnit}`, {
+              value: temperature.feelsLike,
             })}
           </Heading>
         </div>
         {icon}
       </div>
+      {/* --- Stats --- */}
       <ul className={styles.list}>
-        <li className={styles.item}>
-          <Text as="p" className={styles.title}>
-            <Icon.Common name="Wind" size={"1em"} title={t("current.wind")} />
-            {t("current.wind")}
-          </Text>
-          <Text as="p" weight="bold">
-            {stats.wind}
-          </Text>
-        </li>
-        <li className={styles.item}>
-          <Text as="p" className={styles.title}>
-            <Icon.Common
-              name="Humidity"
-              size={"1em"}
-              title={t("current.humidity")}
-            />
-            {t("current.humidity")}
-          </Text>
-          <Text as="p" weight="bold">
-            {stats.humidity}
-          </Text>
-        </li>
-        <li className={styles.item}>
-          <Text as="p" className={styles.title}>
-            <Icon.Common
-              name="Pressure"
-              size={"1em"}
-              title={t("current.pressure")}
-            />
-            {t("current.pressure")}
-          </Text>
-          <Text as="p" weight="bold">
-            {stats.pressure}
-          </Text>
-        </li>
-        <li className={styles.item}>
-          <Text as="p" className={styles.title}>
-            <Icon.Common
-              name="Precipitation"
-              size={"1em"}
-              title={t("current.precipitation")}
-            />
-            {t("current.precipitation")}
-          </Text>
-          <Text as="p" weight="bold">
-            {stats.precipitation}
-          </Text>
-        </li>
-        <li className={styles.item}>
-          <Text as="p" className={styles.title}>
-            <Icon.Common
-              name="Visibility"
-              size={"1em"}
-              title={t("current.visibility")}
-            />
-            {t("current.visibility")}
-          </Text>
-          <Text as="p" weight="bold">
-            {stats.visibility}
-          </Text>
-        </li>
-        <li className={styles.item}>
-          <Text as="p" className={styles.title}>
-            <Icon.Common
-              name="UVIndex"
-              size={"1em"}
-              title="Ultraviolet index"
-            />
-            <span>
-              <Trans
-                components={{
-                  abbr: <abbr title={t("current.ultraviolet")} />,
-                }}
-                i18nKey="current.uv-index"
-                t={t}
-              />
-            </span>
-          </Text>
-          <Text as="p" weight="bold">
-            {stats.ultravioletIndex}
-          </Text>
-        </li>
+        {Object.entries(stats).map(([key, value]) => (
+          <li className={styles.item} key={key}>
+            <Text as="p" className={styles.title}>
+              {t(`current.stats.${key}.title`)}
+            </Text>
+            <Text as="p" weight="bold">
+              {t(`current.stats.${key}.unit.${measurementSystem}`, {
+                value,
+                defaultValue: t(`current.stats.${key}.unit`, {
+                  value,
+                }),
+              })}
+            </Text>
+          </li>
+        ))}
       </ul>
     </Section>
   );

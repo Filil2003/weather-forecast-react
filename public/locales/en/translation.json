@@ -1,14 +1,54 @@
 {
   "current": {
-    "feelsLike": "Feels like {{temperature, string}}",
-    "humidity": "Humidity",
-    "precipitation": "Precipitation",
-    "pressure": "Pressure",
     "title": "Current weather",
-    "ultraviolet": "Ultraviolet",
-    "uv-index": "<abbr>UV</abbr> Index",
-    "visibility": "Visibility",
-    "wind": "Wind"
+    "temperature": {
+      "actual": {
+        "celsius": "{{value, number}}°C",
+        "fahrenheit": "{{value, number}}°F"
+      },
+      "feelsLike": {
+        "celsius": "Feels like {{value, number}}°C",
+        "fahrenheit": "Feels like {{value, number}}°F"
+      }
+    },
+    "stats": {
+      "wind": {
+        "title": "Wind",
+        "unit": {
+          "metric": "{{value, number}} km/h",
+          "imperial": "{{value, number}} mph"
+        }
+      },
+      "pressure": {
+        "title": "Pressure",
+        "unit": {
+          "metric": "{{value, number}} mb",
+          "imperial": "{{value, number}} in"
+        }
+      },
+      "precipitation": {
+        "title": "Precipitation",
+        "unit": {
+          "metric": "{{value, number}} mm",
+          "imperial": "{{value, number}} in"
+        }
+      },
+      "visibility": {
+        "title": "Visibility",
+        "unit": {
+          "metric": "{{value, number}} km",
+          "imperial": "{{value, number}} mi"
+        }
+      },
+      "humidity": {
+        "title": "Humidity",
+        "unit": "{{value, number}}%"
+      },
+      "ultravioletIndex": {
+        "title": "UV Index",
+        "unit": "{{value, number}}"
+      }
+    }
   },
   "hourly": {
     "time": "{{time, datetime(hour: 'numeric')}}",

@@ -26,12 +26,18 @@ export function fromDto({
         isCelsius ? currentDto.feelslike_c : currentDto.feelslike_f,
       ),
     },
-    wind: isMetricSystem ? currentDto.wind_kph : currentDto.wind_mph,
-    pressure: isMetricSystem ? currentDto.pressure_mb : currentDto.pressure_in,
-    precipitation: isMetricSystem ? currentDto.precip_mm : currentDto.precip_in,
-    visibility: isMetricSystem ? currentDto.vis_km : currentDto.vis_miles,
-    humidity: currentDto.humidity,
-    ultravioletIndex: currentDto.uv,
+    stats: {
+      wind: isMetricSystem ? currentDto.wind_kph : currentDto.wind_mph,
+      pressure: isMetricSystem
+        ? currentDto.pressure_mb
+        : currentDto.pressure_in,
+      precipitation: isMetricSystem
+        ? currentDto.precip_mm
+        : currentDto.precip_in,
+      visibility: isMetricSystem ? currentDto.vis_km : currentDto.vis_miles,
+      humidity: currentDto.humidity,
+      ultravioletIndex: currentDto.uv,
+    },
   };
 
   const hourly: Hour[] = forecastDto.forecastday
@@ -55,8 +61,8 @@ export function fromDto({
       title: day.condition.text,
     }),
     temperature: {
-      avg: isCelsius ? `${day.avgtemp_c}°C` : `${day.avgtemp_f}°F`,
-      min: isCelsius ? `${day.mintemp_c}°C` : `${day.mintemp_f}°F`,
+      avg: isCelsius ? day.avgtemp_c : day.avgtemp_f,
+      min: isCelsius ? day.mintemp_c : day.mintemp_f,
     },
   }));
 

@@ -5,7 +5,7 @@ export interface Day {
   condition: string;
   icon: JSX.Element;
   temperature: {
-    avg: string;
-    min: string;
+    avg: number;
+    min: number;
   };
 }
