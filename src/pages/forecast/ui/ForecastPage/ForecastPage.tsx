@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { WeatherApiError } from "#shared/api/weather";
 import { useDocumentTitle } from "#shared/lib/react";
 import { Footer } from "#widgets/Footer";
 import { Header } from "#widgets/Header";
@@ -13,7 +14,7 @@ import { WeeklyForecast } from "../WeeklyForecast/WeeklyForecast.tsx";
 export function ForecastPage() {
   const [city, setCity] = useState("Санкт-Петербург");
   const { t, i18n } = useTranslation();
-  const { data } = useQuery(
+  const { data, error, isError } = useQuery(
     queries.forecast({
       q: city,
       lang: i18n.language,
@@ -21,6 +22,12 @@ export function ForecastPage() {
   );
 
   useDocumentTitle(t("meta.title"));
+
+  if (isError) {
+    if (error instanceof WeatherApiError) {
+      alert(t(`api.${error.details.code}`));
+    }
+  }
 
   if (!data) return <div>Loading...</div>;
 
