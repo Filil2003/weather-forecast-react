@@ -1,15 +1,18 @@
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { useSettingsStore } from "#shared/model";
 import { Button, Heading, Icon, Section, Text } from "#shared/ui";
 import type { Hour } from "../../model";
 import styles from "./HourlyForecast.module.css";
 
 interface Props {
-  forecast: Hour[];
+  data: Hour[];
 }
 
-export function HourlyForecast({ forecast }: Props) {
+export function HourlyForecast({ data }: Props) {
   const { t, i18n } = useTranslation();
+  const temperatureUnit = useSettingsStore((store) => store.temperatureUnit);
+
   const listRef = useRef<HTMLUListElement | null>(null);
 
   const scrollList = useCallback(
@@ -41,7 +44,7 @@ export function HourlyForecast({ forecast }: Props) {
           />
         </Button>
         <ul className={styles.list} ref={listRef}>
-          {forecast.map((hour) => (
+          {data.map((hour) => (
             <li className={styles.item} key={hour.time}>
               <Text as="p">
                 {t("hourly.time", {
@@ -50,7 +53,7 @@ export function HourlyForecast({ forecast }: Props) {
               </Text>
               {hour.icon}
               <Heading as="h3" variant="small">
-                {hour.temperature}
+                {hour.temperature[temperatureUnit]}
               </Heading>
               <Text as="p" className={styles.precipitation} variant="caption">
                 <Icon.Common name="raindrop" size={"1rem"} title="Raindrop" />

@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { WeatherApiError } from "#shared/api/weather";
 import { useDocumentTitle } from "#shared/lib/react";
+import { DataGuard } from "#shared/ui";
 import { Footer } from "#widgets/Footer";
 import { Header } from "#widgets/Header";
-import { fromDto } from "../../api/fromDto.ts";
 import { queries } from "../../api/queries.ts";
 import { CurrentWeather } from "../CurrentWeather/CurrentWeather.tsx";
 import { HourlyForecast } from "../HourlyForecast/HourlyForecast.tsx";
@@ -16,7 +16,7 @@ export function ForecastPage() {
   useDocumentTitle(t("document.title"));
 
   const [city, setCity] = useState("Санкт-Петербург");
-  const { data, error, isError } = useQuery(
+  const { data, error, isError, isLoading } = useQuery(
     queries.forecast({
       q: city,
       lang: i18n.language,
@@ -29,21 +29,22 @@ export function ForecastPage() {
     }
   }
 
-  if (!data) return <div>Loading...</div>;
-
-  const { current, hourly, weekly } = fromDto(data);
+  // TODO: Вынести Header и Footer в layout, чтобы не рендерелись постоянно.
+  // TODO: Использовать store или контекст чтобы отделить main от header?
 
   return (
     <>
       <Header city={city} onCityChange={setCity} />
       <main>
-        {data && (
-          <>
-            <CurrentWeather weather={current} />
-            <HourlyForecast forecast={hourly} />
-            <WeeklyForecast forecast={weekly} />
-          </>
-        )}
+        <DataGuard fallback={"Loading CurrentWeather..."} isLoading={isLoading}>
+          <CurrentWeather data={data?.current!} />
+        </DataGuard>
+        <DataGuard fallback={"Loading HourlyForecast..."} isLoading={isLoading}>
+          <HourlyForecast data={data?.hourly!} />
+        </DataGuard>
+        <DataGuard fallback={"Loading WeeklyForecast..."} isLoading={isLoading}>
+          <WeeklyForecast data={data?.weekly!} />
+        </DataGuard>
       </main>
       <Footer />
     </>

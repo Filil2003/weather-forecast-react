@@ -1,20 +1,22 @@
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { useSettingsStore } from "#shared/model";
 import { Section, Text } from "#shared/ui";
 import type { Day } from "../../model";
 import styles from "./WeeklyForecast.module.css";
 
 interface Props {
-  forecast: Day[];
+  data: Day[];
 }
 
-export function WeeklyForecast({ forecast }: Props) {
+export function WeeklyForecast({ data }: Props) {
   const { t } = useTranslation();
+  const temperatureUnit = useSettingsStore((store) => store.temperatureUnit);
 
   return (
     <Section heading={t("weekly.title")} headingLevel="h2">
       <ul className={styles.list}>
-        {forecast.map((day, index) => (
+        {data.map((day, index) => (
           <li
             className={clsx(styles.item, { [styles.weekend]: index % 2 === 0 })}
             key={day.date}
@@ -34,8 +36,8 @@ export function WeeklyForecast({ forecast }: Props) {
             {day.icon}
             <Text className={styles.condition}>{day.condition}</Text>
             <Text as="p" className={styles.temperature}>
-              <Text weight="bold">{day.temperature.avg}</Text>
-              {day.temperature.min}
+              <Text weight="bold">{day.temperature.avg[temperatureUnit]}</Text>
+              {day.temperature.min[temperatureUnit]}
             </Text>
           </li>
         ))}

@@ -4,14 +4,32 @@ export interface Weather {
   condition: string;
   icon: JSX.Element;
   temperature: {
-    actual: number;
-    feelsLike: number;
+    actual: {
+      celsius: number;
+      fahrenheit: number;
+    };
+    feelsLike: {
+      celsius: number;
+      fahrenheit: number;
+    };
   };
   stats: {
-    wind: number;
-    pressure: number;
-    precipitation: number;
-    visibility: number;
+    wind: {
+      metric: number;
+      imperial: number;
+    };
+    pressure: {
+      metric: number;
+      imperial: number;
+    };
+    precipitation: {
+      metric: number;
+      imperial: number;
+    };
+    visibility: {
+      metric: number;
+      imperial: number;
+    };
     humidity: number;
     ultravioletIndex: number;
   };

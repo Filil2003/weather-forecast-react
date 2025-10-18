@@ -5,11 +5,11 @@ import type { Weather } from "../../model";
 import styles from "./CurrentWeather.module.css";
 
 interface Props {
-  weather: Weather;
+  data: Weather;
 }
 
 export function CurrentWeather({
-  weather: { condition, icon, temperature, stats },
+  data: { condition, icon, temperature, stats },
 }: Props) {
   const { t } = useTranslation();
   const { measurementSystem, temperatureUnit } = useSettingsStore();
@@ -23,12 +23,12 @@ export function CurrentWeather({
         <div className={styles.temperature}>
           <Heading as="h3" variant="huge">
             {t(`current.temperature.actual.${temperatureUnit}`, {
-              value: temperature.actual,
+              value: temperature.actual[temperatureUnit],
             })}
           </Heading>
           <Heading as="h3" variant="small">
             {t(`current.temperature.feelsLike.${temperatureUnit}`, {
-              value: temperature.feelsLike,
+              value: temperature.feelsLike[temperatureUnit],
             })}
           </Heading>
         </div>
@@ -44,7 +44,7 @@ export function CurrentWeather({
             </dt>
             <dd>
               {t(`current.stats.${key}.unit.${measurementSystem}`, {
-                value,
+                value: getStatValue(value, measurementSystem),
                 defaultValue: t(`current.stats.${key}.unit`, { value }),
               })}
             </dd>
@@ -53,4 +53,12 @@ export function CurrentWeather({
       </dl>
     </Section>
   );
+}
+
+function getStatValue(
+  value: number | { metric: number; imperial: number },
+  system: "metric" | "imperial",
+) {
+  if (typeof value === "number") return value;
+  return value[system];
 }

@@ -5,7 +5,13 @@ export interface Day {
   condition: string;
   icon: JSX.Element;
   temperature: {
-    avg: number;
-    min: number;
+    avg: {
+      celsius: number;
+      fahrenheit: number;
+    };
+    min: {
+      celsius: number;
+      fahrenheit: number;
+    };
   };
 }
