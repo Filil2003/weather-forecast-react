@@ -15,6 +15,9 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    backend: {
+      loadPath: "/weather-forecast-react/locales/{{lng}}/{{ns}}.json",
+    },
     supportedLngs: Object.keys(supportedLanguages),
     interpolation: {
       escapeValue: false,

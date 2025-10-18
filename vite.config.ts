@@ -5,6 +5,7 @@ import { patchCssModules } from "vite-css-modules";
 import checker from "vite-plugin-checker";
 
 export default defineConfig({
+  base: "/weather-forecast-react/",
   plugins: [
     react(),
     patchCssModules({

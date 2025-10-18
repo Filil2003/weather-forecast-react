@@ -1,5 +1,6 @@
 {
   "name": "weather-forecast-react",
+  "homepage": "https://filil2003.github.io/weather-forecast-react/",
   "type": "module",
   "scripts": {
     "dev": "vite --host",

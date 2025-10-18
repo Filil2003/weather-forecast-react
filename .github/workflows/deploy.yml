@@ -1,0 +1,61 @@
+name: "Deploy"
+
+on:
+  push:
+    branches: [ 'main' ]
+
+  # Allows to run manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v5
+
+      - name: "Set up Node"
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          cache: "npm"
+
+      - name: "Install dependencies"
+        run: npm ci
+
+      - name: "Install typed-css-modules for type generation"
+        run: npm install typed-css-modules --no-save
+
+      - name: "Generate typed CSS modules"
+        run: npx typed-css-modules src --searchDir src --verbose
+
+      - name: "Build"
+        env:
+          VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
+          VITE_WEATHER_BASE_URL: ${{ secrets.VITE_WEATHER_BASE_URL }}
+        run: npm run build
+
+      - name: "Setup Pages"
+        uses: actions/configure-pages@v5
+
+      - name: "Upload artifact"
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: './dist'
+
+      - name: "Deploy to GitHub Pages"
+        id: deployment
+        uses: actions/deploy-pages@v4
