@@ -19,6 +19,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  text-decoration: none;
+}
+
 abbr {
   cursor: help;
 }
@@ -46,6 +50,8 @@ input[type="search"]::-webkit-search-results-decoration {
 #root {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  /*max-width: 360px;*/
   min-block-size: 100svh;
+  /*margin-inline: auto;*/
   isolation: isolate;
 }
