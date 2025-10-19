@@ -8,7 +8,7 @@ export function QueryProvider({ children }: PropsWithChildren) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools />
+      <ReactQueryDevtools buttonPosition="bottom-left" position="left" />
     </QueryClientProvider>
   );
 }
