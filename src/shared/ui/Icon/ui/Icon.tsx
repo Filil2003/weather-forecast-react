@@ -22,6 +22,7 @@ type SpriteIcons = {
     | "wind"
     | string;
   flags: "ru" | "us";
+  socials: "github" | "figma";
   weather: string;
 };
 
@@ -62,6 +63,9 @@ export const Icon = Object.assign(IconComponent, {
   ),
   Flags: (props: Omit<Props<"flags">, "sprite">) => (
     <IconComponent sprite="flags" {...props} />
+  ),
+  Socials: (props: Omit<Props<"socials">, "sprite">) => (
+    <IconComponent sprite="socials" {...props} />
   ),
   Weather: (props: Omit<Props<"weather">, "sprite">) => (
     <IconComponent sprite="weather" {...props} />
