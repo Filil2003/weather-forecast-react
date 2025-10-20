@@ -9,6 +9,10 @@
   margin: 0;
 }
 
+p + p {
+  margin-top: 1em;
+}
+
 body {
   font-family: Inter, sans-serif;
   color: var(--text-color);
