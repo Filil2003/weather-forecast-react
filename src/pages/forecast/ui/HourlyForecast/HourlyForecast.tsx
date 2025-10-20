@@ -40,7 +40,7 @@ export function HourlyForecast({ data }: Props) {
           <Icon.Common
             dirSensitive={true}
             name="arrowLeft"
-            title={t("hourly.button.next")}
+            title={t("hourly.button.prev")}
           />
         </Button>
         <ul className={styles.list} ref={listRef}>
@@ -66,7 +66,7 @@ export function HourlyForecast({ data }: Props) {
           <Icon.Common
             dirSensitive={true}
             name="arrowRight"
-            title={t("hourly.button.prev")}
+            title={t("hourly.button.next")}
           />
         </Button>
       </div>
