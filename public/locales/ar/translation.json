@@ -53,6 +53,10 @@
   "hourly": {
     "time": "{{time, datetime(timeStyle: 'short')}}",
     "title": "توقعات كل ساعة",
+    "temperature": {
+      "celsius": "{{value, number}}°C",
+      "fahrenheit": "{{value, number}}°F"
+    },
     "button": {
       "next": "التمرير للأمام",
       "prev": "التمرير للخلف"
@@ -64,7 +68,11 @@
   "weekly": {
     "date": "{{date, datetime(day: 'numeric'; month: 'long')}}",
     "day": "{{date, datetime(weekday: 'long')}}",
-    "title": "توقعات الأيام الثلاثة"
+    "title": "توقعات الأيام الثلاثة",
+    "temperature": {
+      "celsius": "{{value, number}}°C",
+      "fahrenheit": "{{value, number}}°F"
+    }
   },
   "footer": {
     "weather-data-source": "بيانات الطقس مقدمة من"

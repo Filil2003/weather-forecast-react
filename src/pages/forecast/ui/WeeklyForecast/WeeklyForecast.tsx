@@ -36,8 +36,14 @@ export function WeeklyForecast({ data }: Props) {
             {day.icon}
             <Text className={styles.condition}>{day.condition}</Text>
             <Text as="p" className={styles.temperature}>
-              <Text weight="bold">{day.temperature.avg[temperatureUnit]}</Text>
-              {day.temperature.min[temperatureUnit]}
+              <Text weight="bold">
+                {t(`weekly.temperature.${temperatureUnit}`, {
+                  value: day.temperature.avg[temperatureUnit],
+                })}
+              </Text>
+              {t(`weekly.temperature.${temperatureUnit}`, {
+                value: day.temperature.min[temperatureUnit],
+              })}
             </Text>
           </li>
         ))}

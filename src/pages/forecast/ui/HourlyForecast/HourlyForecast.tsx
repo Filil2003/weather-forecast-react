@@ -53,11 +53,13 @@ export function HourlyForecast({ data }: Props) {
               </Text>
               {hour.icon}
               <Heading as="h3" variant="small">
-                {hour.temperature[temperatureUnit]}
+                {t(`hourly.temperature.${temperatureUnit}`, {
+                  value: hour.temperature[temperatureUnit],
+                })}
               </Heading>
               <Text as="p" className={styles.precipitation} variant="caption">
                 <Icon.Common name="raindrop" size={"1rem"} title="Raindrop" />
-                {hour.chanceOfRain}
+                {hour.chanceOfRain}%
               </Text>
             </li>
           ))}

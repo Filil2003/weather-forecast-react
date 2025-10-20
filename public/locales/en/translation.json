@@ -53,6 +53,10 @@
   "hourly": {
     "time": "{{time, datetime(hour: 'numeric')}}",
     "title": "Hourly forecast",
+    "temperature": {
+      "celsius": "{{value, number}}°C",
+      "fahrenheit": "{{value, number}}°F"
+    },
     "button": {
       "next": "Scroll next",
       "prev": "Scroll previous"
@@ -64,7 +68,11 @@
   "weekly": {
     "date": "{{date, datetime(day: 'numeric'; month: 'long')}}",
     "day": "{{date, datetime(weekday: 'long')}}",
-    "title": "Three-day forecast"
+    "title": "Three-day forecast",
+    "temperature": {
+      "celsius": "{{value, number}}°C",
+      "fahrenheit": "{{value, number}}°F"
+    }
   },
   "footer": {
     "weather-data-source": "Weather data provided by"
