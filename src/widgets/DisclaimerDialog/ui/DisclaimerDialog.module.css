@@ -52,6 +52,10 @@
   text-wrap: balance;
   border: 1px solid var(--foreground-color);
   border-radius: var(--radius-xl);
+
+  > p + p {
+    margin-top: 1em;
+  }
 }
 
 .links {
