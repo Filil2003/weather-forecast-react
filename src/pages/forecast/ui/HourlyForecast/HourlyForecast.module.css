@@ -1,6 +1,6 @@
 .slider {
   display: grid;
-  grid-template-columns: min-content 1fr min-content;
+  grid-template-columns: max-content 1fr max-content;
   column-gap: 0.5em;
   align-items: center;
 }
