@@ -11,6 +11,7 @@ export function fromDto({
     condition: currentDto.condition.text,
     icon: createElement(Icon.Weather, {
       name: `${currentDto.condition.code}-${currentDto.is_day ? "day" : "night"}`,
+      size: "5.75em",
       title: currentDto.condition.text,
     }),
     temperature: {
@@ -51,6 +52,7 @@ export function fromDto({
       time: hour.time,
       icon: createElement(Icon.Weather, {
         name: `${hour.condition.code}-${hour.is_day ? "day" : "night"}`,
+        size: "3em",
         title: hour.condition.text,
       }),
       temperature: {
@@ -66,6 +68,7 @@ export function fromDto({
     condition: day.condition.text,
     icon: createElement(Icon.Weather, {
       name: `${day.condition.code}-day`,
+      size: "2.25em",
       title: day.condition.text,
     }),
     temperature: {
